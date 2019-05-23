@@ -3,6 +3,7 @@ version: '3'
 services:
   db:
     image: postgres
+    container_name: db
     # volumes:
       # - /my/own/datadir:/var/lib/postgresql/data
     environment:
@@ -12,6 +13,7 @@ services:
 
   web:
     build: .
+    container_name: web
     command: /bin/bash startup.sh
     volumes:
       - .:/code
