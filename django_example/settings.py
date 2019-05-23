@@ -75,11 +75,12 @@ WSGI_APPLICATION = 'django_example.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.' + os.environ['DB_TYPE'],
         'NAME': os.environ['DB_NAME'],
         'USER': os.environ['DB_USER'],
         'HOST': os.environ['DB_HOST'],
         'PORT': os.environ['DB_PORT'],
+        'PASSWORD': os.environ['DB_PASS'],
     }
 }
 
@@ -108,7 +109,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = os.environ['TIMEZONE']
 
 USE_I18N = True
 

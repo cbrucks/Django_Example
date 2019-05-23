@@ -3,13 +3,28 @@ version: '3'
 services:
   db:
     image: postgres
+    # volumes:
+      # - /my/own/datadir:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=CGCEnfsEqYG7SpAdXSSU
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=postgres
 
   web:
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    command: /bin/bash startup.sh
     volumes:
       - .:/code
     ports:
-      - "8000:8000"
+      - "80:8000"
     depends_on:
       - db
+    environment:
+      - DB_TYPE=postgresql
+      - DB_NAME=postgres
+      - DB_USER=postgres
+      - DB_PASS=CGCEnfsEqYG7SpAdXSSU
+      - DB_HOST=db
+      - APP_DEBUG=True
+      # - APP_SECRET_KEY=asdlfajsdf;lajksfdj
+      - TIMEZONE=America/Chicago
